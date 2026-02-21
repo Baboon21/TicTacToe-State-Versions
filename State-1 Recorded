@@ -1,0 +1,64 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[,] ticTacBoard = new int[3,3]//definition of 2D array
+		{
+			{-1,-1,-1},	   //
+			{-1,-1,-1},    // Initialisation of box
+			{-1,-1,-1}	   //
+		};	
+		
+		displayBoard(ticTacBoard);
+		//User gives input 
+		 Console.Write("Enter row (0–2): ");
+		int rownum = userInput();
+		Console.Write("Enter column (0–2): ");
+		int colnum = userInput();
+	}
+
+public static void displayBoard(int [,] ticTacBoard)
+	{
+		
+	//printing
+	for(int r = 0;r <= 2; r++)
+	{
+		for(int c = 0; c <= 2; c++)
+		{
+			Console.Write("_,");
+		}
+	Console.Write("\n");
+	}
+		
+}
+public static int userInput()
+{
+	int r;   // moved outside so it is still alive after break. Was inside the variable. I needed to be able to access it at any time at the (current)assigned state
+
+	while (true)
+	{
+   
+    	string? input = Console.ReadLine();   // 'inputR' --> 'input' is shorter & clearer. A change that was made
+
+    	if (int.TryParse(input, out r))
+   		 {
+       	 if (r >= 0 && r <= 2)//range validatior
+        {
+            // 
+            break;
+        }
+        else
+        {
+            Console.WriteLine("Number must be between 0 and 2. Try again."); //invalid input given by player
+        }
+    }
+    else
+    {
+        Console.WriteLine("That's not a valid number. Try again.");
+    }
+   }//end while
+	return r;
+}
+}
