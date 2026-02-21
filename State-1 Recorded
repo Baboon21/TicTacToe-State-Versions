@@ -9,14 +9,14 @@ public class Program
 			{-1,-1,-1},	   //
 			{-1,-1,-1},    // Initialisation of box
 			{-1,-1,-1}	   //
-		};	
+		};
 		
 		displayBoard(ticTacBoard);
 		//User gives input 
 		 Console.Write("Enter row (0–2): ");
-		int rownum = userInput();
-		Console.Write("Enter column (0–2): ");
-		int colnum = userInput();
+		int rownum = userInput(); //asks for row index
+		Console.Write("Enter column (0–2): "); 
+		int colnum = userInput(); //asks for column index
 	}
 
 public static void displayBoard(int [,] ticTacBoard)
@@ -61,4 +61,12 @@ public static int userInput()
    }//end while
 	return r;
 }
+
+
+//curently this code will only return:
+// _,_,_,
+// _,_,_,
+//_,_,_,
+//Enter row (0–2):__user input__
+//Enter column (0–2): __user input__
 }
