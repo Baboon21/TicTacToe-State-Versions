@@ -1,0 +1,187 @@
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        int[,] ticTacBoard = new int[3, 3] // definition of 2D array
+        {
+            {-1, -1, -1},
+            {-1, -1, -1}, // Initialisation of box
+            {-1, -1, -1}
+        };
+
+        int[] P1rCount = new int[3] { 0, 0, 0 }; // if player enters a number, the index for the coordinate goes to the same index here. Then the counter for that number should increase in value up until the number hits 3 where the user wins
+        int[] P1cCount = new int[3] { 0, 0, 0 };
+        int[] P2rCount = new int[3] { 0, 0, 0 };
+        int[] P2cCount = new int[3] { 0, 0, 0 };
+		
+		int rownum = -1;
+		int colnum = -1;
+		
+        for (int t = 0; t <= 9; t++)
+        	{
+            displayBoard(ticTacBoard);
+			
+            Console.WriteLine("Player1");
+			
+			while(true)
+			{	
+			
+            	// User gives input
+            	Console.Write("Enter row (0–2): ");
+            	rownum = userInput();
+            	Console.Write("Enter column (0–2): ");
+            	colnum = userInput();
+				bool isValid = isValidMove(ticTacBoard,rownum, colnum);
+				if(isValid == true)
+				{
+					break;
+				}
+				else
+				{
+					Console.WriteLine("This box is already occupied. Choose another.");
+				 Console.Clear();
+				 }	
+				bool TIE = isTie(ticTacBoard); 
+				if (TIE == true)
+				{
+					Console.WriteLine("Game is tied. 		Enter 1 to play again.			Enter 'Exit' to exit the game ");
+					
+				}
+				//the reason Why We Dont Need Extra Code Is Because We Do Not Need The Istie Func To Return Fapse And The Program with Continue Ro Run Anyway Without it.
+			}
+			
+            ticTacBoard[rownum, colnum] = 0;
+            //Console.Clear();
+            displayBoard(ticTacBoard);
+			P1rCount[rownum]++;
+			P1cCount[rownum]++;
+			
+			int winP1 = WIN(P1rCount, P1cCount);
+				if(winP1 == 1)
+					{		
+						Console.WriteLine("PLAYER1 HAS WON THE GAME!");
+					}
+			
+			//player2 starts here
+            Console.WriteLine("Player2");
+
+            // User gives input
+            Console.Write("Enter row (0–2): ");
+            int rownum2 = userInput();
+
+            Console.Write("Enter column (0–2): ");
+            int colnum2 = userInput();
+
+            ticTacBoard[rownum2, colnum2] = 1;
+            //Console.Clear();
+            displayBoard(ticTacBoard);
+			P2rCount[rownum]++;
+			P2cCount[rownum]++;
+			
+			int winP2 = WIN(P2rCount, P1cCount);
+				if(winP2 == 1)
+				{
+					Console.WriteLine("PLAYER2 HAS WON THE GAME!");
+				}
+					
+        }
+    }
+
+    public static void displayBoard(int[,] ticTacBoard)
+    {
+		Console.Clear();
+        Console.Write("\n\n\n\n\n");
+
+        // printing
+        for (int r = 0; r <= 2; r++)
+        {
+            for (int c = 0; c <= 2; c++)
+            {
+                int boardPos = ticTacBoard[r, c];
+                switch (boardPos)
+                {
+                    case 0:
+                        Console.Write("O,");
+                        break;
+                    case 1:
+                        Console.Write("1,");
+                        break;
+                    default:
+                        Console.Write("_,");
+                        break;
+                }
+            }
+            Console.Write("\n");
+        }
+    }
+
+    public static int userInput()
+    {
+        int r; // moved outside so it is still alive after break. Was inside the variable. I needed to be able to access it at any time at the (current)assigned state
+
+        while (true)
+        {
+            string? input = Console.ReadLine(); // 'inputR' --> 'input' is shorter & clearer. A change that was made
+
+            if (int.TryParse(input, out r))
+            {
+                if (r >= 0 && r <= 2) // range validator
+                {
+                    break;
+                }
+                else
+                {
+                    //Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(" Number must be between 0 and 2. Try again."); // invalid input given by player. The extra tabs are for clarity.
+                }
+            }
+            else
+            {
+                Console.WriteLine(" That's not a valid number. Try again.");
+            }
+        } // end while
+
+        return r; // currently a mistake here
+    }
+	public static int WIN(int[] rCount, int[] cCount)
+	{
+		for(int i = 0; i <= 2; i++)
+		{
+			if(rCount[i] == 3) // the size of array is counted differently from the index number.
+				return 1;
+			if(cCount[i] == 3)//ticked any column 3 times
+				return 1;
+		}
+		
+		
+		return 0;
+	}
+	
+	
+	public static bool isValidMove(int[,] tTBoard, int rownum, int colnum)//
+	{
+		//for the move to be valid the position has to be initially null value. In this case it has to display: "_"
+		int existingValue = tTBoard[rownum,colnum];
+		//if  position returns >= 0 (null)
+		if(existingValue >= 0)
+		{
+			return false;
+		}
+		
+		return true;
+	}
+public static bool isTie(int[,] ticTacBoard)
+    {
+        for (int r = 0; r <= 2; r++)
+        {
+            for (int c = 0; c <= 2; c++)
+            {
+                if (ticTacBoard[r, c] == -1)
+                    return false;
+            }
+        }
+        return true;
+    }
+}   
