@@ -16,7 +16,7 @@ public class Program
 		
 		int rownum = -1;
 		int colnum = -1;
-		bool gameOver = false; // FIX: added flag to stop game after a win
+		bool gameOver = false; // FIX(new fixed i added here and because i forgot to comment): added flag to stop game after a win
 		
         for (int t = 0; t < 9 && !gameOver; t++) // FIX: t <= 9 changed to t < 9 (only 9 cells)
         	{
