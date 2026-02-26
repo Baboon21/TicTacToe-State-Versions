@@ -1,0 +1,91 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		
+	}	
+	
+		public static string displayRock()
+		{
+			string figure = "";
+			figure +="'Rock'";
+			figure +="    _______";
+			figure +="---'   ____)";
+			figure +="      (_____)";
+			figure +="      (_____)";
+			figure +="      (____)";
+			figure +="---.__(___)";	
+			return figure;
+		}
+	
+	public static string displayPaper()
+	{
+		string figure = "";
+		figure += "     _______";
+		figure += "---'    ________";
+		figure += "           ______)";
+		figure += "          _______)";
+		figure += "         _______)";
+		figure += "---.__________)";
+		return figure;
+	}
+	public static string displayScissors()
+	{
+	string figure = "";
+		figure += "    ______";
+		figure += "---'   ___)____";
+		figure += "          ______)";
+		figure += "       __________)";
+		figure += "      (____)";
+		figure += "---.__(___)";
+		return figure;
+	}
+	
+	public static string computerMove()
+		{
+		
+		Random random = new Random();
+
+            // Generate a random integer between 0 (inclusive) and 3 (exclusive)
+            int randomNumber = random.Next(1, 3);
+			
+		switch(randomNumber)
+		{
+		
+			case 1:
+			  return displayPaper();
+			case 2:
+				return displayScissors();
+			default:
+				return displayRock();
+				
+		}
+		
+	}
+	public static string userMove()
+	{
+		
+		while(true)
+		{
+			string input = Console.ReadLine();
+			
+		if (int.TryParse(input, out int INPUT) >= 1 && INPUT <= 4)
+			{
+				
+			}
+		else
+		{
+				
+		
+		}
+			
+		}
+	
+	
+	
+	
+	
+	}
+}
