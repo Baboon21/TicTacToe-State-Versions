@@ -78,7 +78,6 @@ public class Program
 		{
 			//the variable adding is similar to adding an integer not sure how this will display though. could have named it anything but i chose the most random one.
 			string figure = "";
-			figure +="'Rock'";
 			figure +="    _______\n";
 			figure +="---'   ____)\n";
 			figure +="      (_____)\n";
