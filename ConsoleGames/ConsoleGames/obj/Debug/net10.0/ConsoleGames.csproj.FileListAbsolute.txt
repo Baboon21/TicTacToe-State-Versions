@@ -1,0 +1,14 @@
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\bin\Debug\net10.0\ConsoleGames.exe
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\bin\Debug\net10.0\ConsoleGames.deps.json
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\bin\Debug\net10.0\ConsoleGames.runtimeconfig.json
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\bin\Debug\net10.0\ConsoleGames.dll
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\bin\Debug\net10.0\ConsoleGames.pdb
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.AssemblyInfoInputs.cache
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.AssemblyInfo.cs
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.csproj.CoreCompileInputs.cache
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.dll
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\refint\ConsoleGames.dll
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.pdb
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ConsoleGames.genruntimeconfig.cache
+C:\Users\asolo\OneDrive\DC\VS\Console Games\ConsoleGames\ConsoleGames\obj\Debug\net10.0\ref\ConsoleGames.dll

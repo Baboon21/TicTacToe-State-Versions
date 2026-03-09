@@ -1,0 +1,217 @@
+using System;
+public class TTTGame
+{
+    public static void Play()
+    {
+        int[,] ticTacBoard = new int[3, 3] // definition of board of 9 positions
+        {
+            {-1, -1, -1},
+            {-1, -1, -1}, // Initialisation of box
+            {-1, -1, -1}
+        };
+        int[] P1rCount = new int[3] { 0, 0, 0 }; // if player enters a number, the index for the coordinate goes to the same index here. Then the counter for that number should increase in value up until the number hits 3 where the user wins
+        int[] P1cCount = new int[3] { 0, 0, 0 };
+        int[] P2rCount = new int[3] { 0, 0, 0 };
+        int[] P2cCount = new int[3] { 0, 0, 0 };
+
+        int P1diag1 = 0;
+        int P1diag2 = 0;
+        int P2diag1 = 0;
+        int P2diag2 = 0;
+
+        int rownum = -1;
+        int colnum = -1;
+        bool gameOver = false; // FIX(new fixed i added here and because i forgot to comment): added flag to stop game after a win
+
+        for (int t = 0; t < 9 && !gameOver; t++) // FIX: t <= 9 changed to t < 9 (only 9 cells)
+        {
+            displayBoard(ticTacBoard);
+
+            Console.WriteLine("Player1");
+
+            while (true)
+            {
+
+                // User gives input
+                Console.Write("Enter row (0–2): ");
+                rownum = userInput();
+                Console.Write("Enter column (0–2): ");
+                colnum = userInput();
+                bool isValid = isValidMove(ticTacBoard, rownum, colnum);        //Asks If The Move Is Valid From The Coordinates Given
+                if (isValid == true)
+                {
+                    break;// Since The Move Is Good, We Can Continue Without any Extra Code
+                }
+                else
+                {
+                    Console.WriteLine("This box is already occupied. Choose another.");// Here The Box Is Occupied, The User Will Have To Make Another Move
+                    //Console.Clear();// Console Clear Doesnt Work Well In dotfiddlenet So It Is Reccomended That You Remove BefOre Running Or Add A '//' To Turn It Into A Comment
+                }
+            }
+
+            if (rownum == colnum) P1diag1++;
+            if (rownum + colnum == 2) P1diag2++;
+
+            ticTacBoard[rownum, colnum] = 0;
+            //Console.Clear();
+            displayBoard(ticTacBoard);
+            P1rCount[rownum]++;
+            P1cCount[colnum]++; // FIX: was P1cCount[rownum], needs colnum for column counter
+
+            int winP1 = WIN(P1rCount, P1cCount, P1diag1, P1diag2);
+            if (winP1 == 1)
+            {
+                Console.WriteLine("PLAYER1 HAS WON THE GAME!");
+                gameOver = true; // FIX: stop the game
+                break; // FIX: exit the loop
+            }
+
+            // FIX: tie check moved here (after board is updated, outside while loop)
+            bool TIE = isTie(ticTacBoard);
+            if (TIE == true)
+            {
+                Console.WriteLine("Game is tied!");
+                break;
+            }
+
+            //player2 starts here
+            Console.WriteLine("Player2");
+
+            // FIX (Phase 2): added validation loop for Player 2 (same as Player 1)
+            int rownum2 = -1;
+            int colnum2 = -1;
+            while (true)
+            {
+                // User gives input
+                Console.Write("Enter row (0–2): ");
+                rownum2 = userInput();
+                Console.Write("Enter column (0–2): ");
+                colnum2 = userInput();
+                bool isValid2 = isValidMove(ticTacBoard, rownum2, colnum2);
+                if (isValid2 == true)
+                {
+                    if (rownum2 == colnum2) P2diag1++;
+                    if (rownum2 + colnum2 == 2) P2diag2++;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("This box is already occupied. Choose another.");
+                }
+            }
+
+            ticTacBoard[rownum2, colnum2] = 1;
+            //Console.Clear();
+            displayBoard(ticTacBoard);
+            P2rCount[rownum2]++; // FIX: was P2rCount[rownum], needs rownum2
+            P2cCount[colnum2]++; // FIX: was P2cCount[rownum], needs colnum2
+
+            int winP2 = WIN(P2rCount, P2cCount, P2diag1, P2diag2);
+            if (winP2 == 1)
+            {
+                Console.WriteLine("PLAYER2 HAS WON THE GAME!");
+                gameOver = true; // FIX: stop the game
+                break; // FIX: exit the loop
+            }
+
+            // FIX: tie check after Player 2's move too
+            bool TIE2 = isTie(ticTacBoard);
+            if (TIE2 == true)
+            {
+                Console.WriteLine("Game is tied!");
+                break;
+            }
+
+        }
+    }
+    public static void displayBoard(int[,] ticTacBoard)
+    {
+        //Console.Clear(); i commented here because multiple of my console clears seem to be unnececary. Should work well now.
+        Console.Write("\n\n\n\n\n");
+        // printing
+        for (int r = 0; r <= 2; r++)
+        {
+            for (int c = 0; c <= 2; c++)
+            {
+                int boardPos = ticTacBoard[r, c];
+                switch (boardPos)
+                {
+                    case 0:
+                        Console.Write("O,");
+                        break;
+                    case 1:
+                        Console.Write("X,"); // FIX: was "1,", should display X for Player 2
+                        break;
+                    default:
+                        Console.Write("_,");
+                        break;
+                }
+            }
+            Console.Write("\n");
+        }
+    }
+    public static int userInput()
+    {
+        int r; // moved outside so it is still alive after break. Was inside the variable. I needed to be able to access it at any time at the (current)assigned state
+        while (true)
+        {
+            string? input = Console.ReadLine(); // 'inputR' --> 'input' is shorter & cleaner. A change that was made
+            if (int.TryParse(input, out r))
+            {
+                if (r >= 0 && r <= 2) // range validator
+                {
+                    break;
+                }
+                else
+                {
+                    //Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(" Number must be between 0 and 2. Try again."); // invalid input given by player. The extra tabs are for clarity.
+                }
+            }
+            else
+            {
+                Console.WriteLine(" That's not a valid number. Try again.");
+            }
+        } // end while
+        return r; // currently a mistake here. Rayyan  later: not sure how there is a mistake here 
+    }
+    public static int WIN(int[] rCount, int[] cCount, int diag1, int diag2)
+    {
+        for (int i = 0; i <= 2; i++)
+        {
+            if (rCount[i] == 3)
+                return 1;
+            if (cCount[i] == 3)
+                return 1;
+        }
+        if (diag1 == 3) return 1;
+        if (diag2 == 3) return 1;
+        return 0;
+    }
+
+
+    public static bool isValidMove(int[,] tTBoard, int rownum, int colnum)//
+    {
+        //for the move to be valid the position has to be initially null value. In this case it has to display: "_"
+        int existingValue = tTBoard[rownum, colnum];
+        //if  position returns >= 0 (null)
+        if (existingValue >= 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    public static bool isTie(int[,] ticTacBoard)
+    {
+        for (int r = 0; r <= 2; r++)
+        {
+            for (int c = 0; c <= 2; c++)
+            {
+                if (ticTacBoard[r, c] == -1)
+                    return false;
+            }
+        }
+        return true;
+    }
+}
